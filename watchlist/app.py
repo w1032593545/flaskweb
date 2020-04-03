@@ -32,9 +32,8 @@ class Movie(db.Model):
 
 @app.route('/')
 def index():
-    user = User.query.first()
     movie = Movie.query.all()
-    return render_template("index.html", user=user, movies=movie)
+    return render_template("index.html", movies=movie)
 
 
 # 自定义命令
@@ -65,3 +64,18 @@ def forge():
         db.session.add(movie)
     db.session.commit()
     click.echo("导入数据完成")
+
+
+
+# 错误处理函数
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template("404.html")
+
+
+# 模板上下文处理函数
+@app.context_processor
+def common_user():
+    user = User.query.first()
+    return dict(user=user)
+
