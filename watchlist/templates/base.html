@@ -11,11 +11,14 @@
 </head>
 
 <body>
-    <h2><img src="{{ url_for('static',filename='img/anthony.jpg') }}" alt="" class="avatar">
-        {{ user.name }}"watch list"</h2> <br>
-    <p>
-        总共{{ movies|length }}个电影
-    </p> <br>
+    <h2>
+        <img src="{{ url_for('static',filename='img/anthony.jpg') }}" alt="" class="avatar">
+        {{ user.name }}"watch list"
+    </h2>
+    <!-- flash消息 -->
+    {% for message in get_flashed_messages() %}
+        <div class="alert">{{ message }}</div>
+    {% endfor %}
     <nav>
         <ul>
             <li>
