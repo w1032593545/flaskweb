@@ -69,6 +69,7 @@ nav li a:hover{
 
 
 .float-right{
+    margin-left: 5px;
     float:right;
 }
 
