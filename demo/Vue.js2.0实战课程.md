@@ -40,11 +40,11 @@
 
 #### 2. 非工程化方式的Vue
 
-v-model 双向数据绑定
+v-model 双向数据绑定，指令用来在 input、select、textarea、checkbox、radio 等表单控件元素上创建双向数据绑定，根据表单上的值，自动更新绑定的元素的值。 
 
 v-for 循环遍历，渲染列表项
 
-v-bind 绑定数据和元素属性
+v-bind 绑定数据和元素属性，div v-bind:class="{'class1': use}" 判断 use 的值，如果为 true 使用 class1 类的样式，否则不使用该类： 
 
 v-on  事件绑定
 
