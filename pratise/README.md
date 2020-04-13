@@ -1,6 +1,6 @@
 # pratise
 
-> pratise
+> 购物车
 
 ## Build Setup
 
