@@ -1,10 +1,8 @@
 *.pyc
 *~
-__pycache__
 .vscode
+__pycache__
 env
 .env
 *.db
-css
-fonts
-node_modules
+node_modules/

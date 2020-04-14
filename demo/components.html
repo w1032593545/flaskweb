@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组建的作用域</title>
+</head>
+<body>
+    
+    <template id="hello">
+        <h1>{{ msg }}:{{ user }}</h1>
+    </template>
+    <!-- form-component组件的模板 -->
+    <template id="form">
+        <div>
+            <label for="name">你的名字是什么</label>
+            <input type="text" id="name" v-bind:user='user' v-on:input='onInput' autocomplete="off">
+        </div>
+    </template>
+    <div id="app">
+        <form-component v-model='user'></form-component>
+        <hello-component v-bind:user='user'></hello-component>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    Vue.component("hello-component",{
+        template:'#hello',
+        data:function(){
+            return {
+                msg:'Hello'
+            }
+        },
+        props:['user']
+    });
+    // 注册form组件
+    Vue.component('form-component',{
+        template:'#form',
+        props:['user'],
+        methods: {
+            onInput:function(ev){
+                this.$emit('input',ev.target.value)
+                // $emit() 可以实现子组件向父组件传递值
+                // 第一个参数为事件触发的函数名称，需要在父组件中接受
+                // 第二个参数为传递的值
+            }
+        },
+    })
+    new Vue({
+        el:'#app',
+        data:{
+            user:'wx'
+        }
+    })
+</script>
+</html>
