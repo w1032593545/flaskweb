@@ -4,6 +4,7 @@ import Base from './Base.vue'
 import IndexPage from './pages/index.vue'
 import mock from '../mock/mock.js'
 
+
 Vue.use(VueRouter)
 let router = new VueRouter({
   mode:'history',

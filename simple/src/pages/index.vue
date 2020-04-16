@@ -19,7 +19,7 @@
       <div class="index-left-block lastest-news">
         <h2>最新消息</h2>
         <ul>
-          <li v-for="item in newslist">
+          <li v-for="item in newsList">
             <a v-bind:href="item.url">{{ item.title }}</a>
             <span v-if="item.hot" class="hot-tag">HOT</span>
           </li>
@@ -27,33 +27,12 @@
       </div>
     </div>
     <div class="index-right">
-      <div style="margin:0 auto;width:900px;height:300px;background:red;">使用组件代替</div>
+      <slider-component></slider-component>
       <div class="index-boader-list">
-        <div class="index-boader-item">
+        <div class="index-boader-item" v-for="item in boarderList">
           <div class="index-boader-inner">
-            <h2>戴尔电脑</h2>
-            <p>戴尔电脑就是好哇</p>
-            <div class="index-boader-button">立即购买</div>
-          </div>
-        </div>
-        <div class="index-boader-item">
-          <div class="index-boader-inner">
-            <h2>戴尔电脑</h2>
-            <p>戴尔电脑就是好哇</p>
-            <div class="index-boader-button">立即购买</div>
-          </div>
-        </div>
-        <div class="index-boader-item">
-          <div class="index-boader-inner">
-            <h2>戴尔电脑</h2>
-            <p>戴尔电脑就是好哇</p>
-            <div class="index-boader-button">立即购买</div>
-          </div>
-        </div>
-        <div class="index-boader-item">
-          <div class="index-boader-inner">
-            <h2>戴尔电脑</h2>
-            <p>戴尔电脑就是好哇</p>
+            <h2>{{ item.title }}</h2>
+            <p>{{ item.description }}</p>
             <div class="index-boader-button">立即购买</div>
           </div>
         </div>
@@ -64,87 +43,54 @@
 
 <script>
 import axios from 'axios'
+import SliderComponent from '../components/sliderComponent'
 export default {
+  components:{
+    SliderComponent
+  },
   mounted() {
-    axios.get('api/getnewslist')
-    .then((res) => {
-      console.log(res);
-      this.newslist = res.data.list
+    axios.get('api/getNewsList')
+    .then((response) => {
+      console.log(response);
+      this.newsList = response.data.list
     })
+    // => 等价于函数回调  匿名函数
     .catch((error) => {
-      console.log(error);
-      
+      console.log(error); 
+    });
+    axios.get('api/getProductList')
+    .then((response) => {
+      console.log(response);
+      this.productList = response.data.pc
+    })
+    // => 等价于函数回调  匿名函数
+    .catch((error) => {
+      console.log(error); 
+    });
+    axios.get('api/getProductList')
+    .then((response) => {
+      console.log(response);
+      this.productList = response.data
+    })
+    // => 等价于函数回调  匿名函数
+    .catch((error) => {
+      console.log(error); 
+    });
+    axios.get('api/getBoarderList')
+    .then((response) => {
+      console.log(response);
+      this.boarderList = response.data
+    })
+    // => 等价于函数回调  匿名函数
+    .catch((error) => {
+      console.log(error); 
     });
   },
   data() {
     return {
-              newslist: [
-          {
-            title: "数据统计",
-            url: "http://starcraft.com"
-          },
-          {
-            title: "数据预测",
-            url: "http://warcraft.com"
-          },
-          {
-            title: "流量分析",
-            url: "http://overwatch.com",
-            hot: true
-          },
-          {
-            title: "广告发布",
-            url: "http://hearstone.com"
-          }
-        ],
-      productList: {
-        pc: {
-          last:true,
-          title: "PC产品",
-          list: [
-            {
-              title: "数据统计",
-              url: "http://starcraft.com"
-            },
-            {
-              title: "数据预测",
-              url: "http://warcraft.com"
-            },
-            {
-              title: "流量分析",
-              url: "http://overwatch.com",
-              hot: true
-            },
-            {
-              title: "广告发布",
-              url: "http://hearstone.com"
-            }
-          ]
-        },
-        app: {
-          title: "手机应用类",
-          list: [
-            {
-              title: "91助手",
-              url: "http://weixin.com"
-            },
-            {
-              title: "产品助手",
-              url: "http://weixin.com",
-              hot: true
-            },
-            {
-              title: "智能地图",
-              url: "http://maps.com"
-            },
-            {
-              title: "语音助手",
-              url: "http://phone.com",
-              hot: true
-            }
-          ]
-        }
-      }
+      newsList:[],
+      productList:null,
+      boarderList:null
     };
   }
 };
