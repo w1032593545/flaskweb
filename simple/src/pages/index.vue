@@ -7,7 +7,7 @@
         <template v-for="product in productList">
           <h3>{{ product.title }}</h3>
           <ul>
-            <li v-for="item in product.list">
+            <li v-for="(item,index) in product.list" v-bind:key="index">
                 <a v-bind:href="item.url">{{ item.title }}</a>
                 <span v-if="item.hot" class="hot-tag">HOT</span>
             </li>
